@@ -66,3 +66,5 @@ VALUES
 (5, 2, 12, 0.5, 9.5),
 (6, 1, 11, 1, 23.0);
 
+-- SE REINICIAN LAS SECUENCIAS SEGÚN LOS DATOS INICIALES
+SELECT setval('public.pizza_id_pizza_seq', 12, true);
