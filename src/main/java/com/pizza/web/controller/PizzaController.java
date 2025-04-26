@@ -26,7 +26,7 @@ public class PizzaController {
 
     @GetMapping("/available")
     public ResponseEntity<List<PizzaEntity>> getAvailable(){
-        return ResponseEntity.ok(this.pizzaService.findAllByAvailableTrueOrderByPrice());
+        return ResponseEntity.ok(this.pizzaService.getAvailable());
     }
 
     @GetMapping("/name/{name}")
@@ -92,5 +92,10 @@ public class PizzaController {
         }
 
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+
+    @GetMapping("/cheapest/{price}")
+    public ResponseEntity<List<PizzaEntity>> getCheapestPizza(@PathVariable Double price){
+        return ResponseEntity.ok(this.pizzaService.getCheapest(price));
     }
 }

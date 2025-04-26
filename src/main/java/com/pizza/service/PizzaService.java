@@ -20,7 +20,8 @@ public class PizzaService {
         return this.pizzaRepository.findAll();
     }
 
-    public List<PizzaEntity> findAllByAvailableTrueOrderByPrice(){
+    public List<PizzaEntity> getAvailable(){
+        System.out.println(this.pizzaRepository.countByVeganTrue());
         return this.pizzaRepository.findAllByAvailableTrueOrderByPriceAsc();
     }
 
@@ -33,7 +34,8 @@ public class PizzaService {
     }
 
     public PizzaEntity findByName(String name){
-        return this.pizzaRepository.findAllByAvailableTrueAndNameIgnoreCase(name);
+        return this.pizzaRepository.findFirstByAvailableTrueAndNameIgnoreCase(name)
+                                   .orElseThrow(() -> new RuntimeException("Pizza not found"));
     }
 
     public PizzaEntity getById(Integer id){
@@ -42,6 +44,10 @@ public class PizzaService {
 
     public PizzaEntity save(PizzaEntity pizza){
         return this.pizzaRepository.save(pizza);
+    }
+
+    public List<PizzaEntity> getCheapest(Double price){
+        return this.pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(price);
     }
 
     public boolean exists(Integer id){
