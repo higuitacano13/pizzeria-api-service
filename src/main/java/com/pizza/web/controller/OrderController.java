@@ -1,6 +1,7 @@
 package com.pizza.web.controller;
 
 import com.pizza.persistence.entity.OrderEntity;
+import com.pizza.persistence.projection.OrderSummary;
 import com.pizza.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,10 @@ public class OrderController {
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<OrderEntity>> getCustomerOrders(@PathVariable String customerId){
         return ResponseEntity.ok(this.orderService.getCustomerOrders(customerId));
+    }
+
+    @GetMapping("/summary/{orderId}")
+    public ResponseEntity<OrderSummary> getOrderSummary(@PathVariable Integer orderId) {
+        return ResponseEntity.ok(this.orderService.getOrderSummary(orderId));
     }
 }
