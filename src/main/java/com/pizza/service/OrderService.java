@@ -1,11 +1,12 @@
 package com.pizza.service;
 
 import com.pizza.persistence.entity.OrderEntity;
-import com.pizza.persistence.entity.PizzaEntity;
 import com.pizza.persistence.projection.OrderSummary;
 import com.pizza.persistence.repository.OrderRepository;
+import com.pizza.service.dto.RamdonOrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,6 +45,11 @@ public class OrderService {
 
     public OrderSummary getOrderSummary(Integer orderId) {
         return this.orderRepository.findSummary(orderId);
+    }
+
+    @Transactional
+    public boolean saveRandomOrder(RamdonOrderDto ramdonOrderDto) {
+        return this.orderRepository.saveRandomOrder(ramdonOrderDto.getIdCustomer(), ramdonOrderDto.getMethod());
     }
 
 
