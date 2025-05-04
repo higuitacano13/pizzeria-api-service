@@ -102,7 +102,9 @@ public class PizzaController {
 
     @GetMapping("/cheapest/{price}")
     public ResponseEntity<List<PizzaEntity>> getCheapestPizza(@PathVariable Double price){
-        return ResponseEntity.ok(this.pizzaService.getCheapest(price));
+        List<PizzaEntity> cheapestPizzas = this.pizzaService.getCheapest(price);
+        if(cheapestPizzas.isEmpty()){ return ResponseEntity.notFound().build(); }
+        return ResponseEntity.ok(cheapestPizzas);
     }
 
     @PutMapping("/updatePrice")

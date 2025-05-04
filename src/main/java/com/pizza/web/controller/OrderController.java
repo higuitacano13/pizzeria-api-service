@@ -37,21 +37,38 @@ public class OrderController {
 
     @GetMapping("/out")
     public ResponseEntity<List<OrderEntity>> getOutsideOrders(){
-        return ResponseEntity.ok(this.orderService.getOutsideOrders());
+        List<OrderEntity> orders = this.orderService.getOutsideOrders();
+        if(orders.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<OrderEntity>> getCustomerOrders(@PathVariable String customerId){
-        return ResponseEntity.ok(this.orderService.getCustomerOrders(customerId));
+        List<OrderEntity> orders = this.orderService.getCustomerOrders(customerId);
+        if(orders.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/summary/{orderId}")
     public ResponseEntity<OrderSummary> getOrderSummary(@PathVariable Integer orderId) {
-        return ResponseEntity.ok(this.orderService.getOrderSummary(orderId));
+        OrderSummary orderInfo = this.orderService.getOrderSummary(orderId);
+        if (orderInfo == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(orderInfo);
     }
 
     @PostMapping("/ramdon")
     public ResponseEntity<Boolean> ramdonOrder(@RequestBody RamdonOrderDto ramdonOrderDto) {
-        return ResponseEntity.ok(this.orderService.saveRandomOrder(ramdonOrderDto));
+        boolean ordertaken = this.orderService.saveRandomOrder(ramdonOrderDto);
+        if (ordertaken) {
+            return ResponseEntity.ok(true);
+        }else{
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

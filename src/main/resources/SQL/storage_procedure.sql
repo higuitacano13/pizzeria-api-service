@@ -8,7 +8,7 @@ CREATE OR REPLACE PROCEDURE take_random_pizza_order(
 LANGUAGE plpgsql
 AS $$
 DECLARE
-id_random_pizza INT;
+    id_random_pizza INT;
     price_random_pizza DECIMAL(5,2);
     price_with_discount DECIMAL(5,2);
     with_errors BOOLEAN DEFAULT FALSE;
