@@ -46,7 +46,7 @@ Pizza Restaurant Service es una aplicación RESTful desarrollada en Java con Spr
 - Si la pizza no existe, retorna HTTP 404 (Not Found).
 - En caso exitoso, retorna HTTP 200 (OK).
 
-  **8- Modificar información de la pizza**
+**8- Modificar información de la pizza**
 - Permite actualizar la información de una pizza especificada.
 - Se valida que la pizza exista en la base de datos.
 - Si la pizza no existe, retorna HTTP 409 (Conflict).
