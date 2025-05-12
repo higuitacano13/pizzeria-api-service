@@ -23,7 +23,9 @@ public class SecurityConfig {
                     customizeRequests
                             .requestMatchers(HttpMethod.GET, "/pizzas/**").hasAnyRole("ADMIN", "CUSTOMER")
                             .requestMatchers(HttpMethod.POST, "/pizzas/**").hasRole("ADMIN")
-                            .requestMatchers(HttpMethod.PUT).denyAll()
+                            .requestMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                            .requestMatchers("/orders/**").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 }).csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
