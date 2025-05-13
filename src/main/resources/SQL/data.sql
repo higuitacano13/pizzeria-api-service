@@ -68,3 +68,9 @@ VALUES
 
 -- SE REINICIAN LAS SECUENCIAS SEGÚN LOS DATOS INICIALES
 SELECT setval('public.pizza_id_pizza_seq', 12, true);
+
+INSERT INTO "user" (username, password, email, locked, disabled)
+VALUES ('admin', '$2y$10$bDFFZMT1.azxGlALpmlP9OQGrgav9pr8RiDfhfbb2cFQR2Zj5Xjti', 'admin@correo.com', false,false);
+
+INSERT INTO "user" (username, password, email, locked, disabled)
+VALUES ('customer', '$2y$10$I0g0LH8kpPpjVu.1.YPTneMpWddtiBj80y9eS7V3454FbMQeU520G', 'customer@correo.com', false,false);

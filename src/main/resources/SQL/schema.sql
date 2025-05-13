@@ -36,3 +36,27 @@ CREATE TABLE order_item (
     quantity NUMERIC(2,1) NOT NULL,
     price NUMERIC(5,2) NOT NULL
 );
+
+
+CREATE TABLE "user" (
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    email VARCHAR(50) NULL,
+    locked BOOLEAN NOT NULL,
+    disabled BOOLEAN NOT NULL,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE user_role (
+   username VARCHAR(20) NOT NULL,
+   role VARCHAR(20) NOT NULL,
+   granted_date TIMESTAMP NOT NULL,
+   PRIMARY KEY (username, role),
+   CONSTRAINT fk_user_role_user1
+       FOREIGN KEY (username)
+           REFERENCES "user" (username)
+           ON DELETE RESTRICT
+           ON UPDATE CASCADE
+);
+
+COMMENT ON COLUMN user_role.role IS 'CUSTOMER\nADMIN';
