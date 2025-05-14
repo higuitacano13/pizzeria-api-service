@@ -74,3 +74,9 @@ VALUES ('admin', '$2y$10$bDFFZMT1.azxGlALpmlP9OQGrgav9pr8RiDfhfbb2cFQR2Zj5Xjti',
 
 INSERT INTO "user" (username, password, email, locked, disabled)
 VALUES ('customer', '$2y$10$I0g0LH8kpPpjVu.1.YPTneMpWddtiBj80y9eS7V3454FbMQeU520G', 'customer@correo.com', false,false);
+
+Insert Into user_role (username, role, granted_date)
+Values('admin','ADMIN', NOW());
+
+Insert Into user_role (username, role, granted_date)
+Values('customer','CUSTOMER', NOW());
